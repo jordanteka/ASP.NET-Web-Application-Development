@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CustomerFeedBackWebsite.Models.FeedBack
+
+<h2>Feedback Form</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label>Customer ID</label>
+        <input asp-for="Customer_ID" />
+    </div>
+    <div>
+        <label>Customer Name</label>
+        <input asp-for="Customer_Name" />
+    </div>
+    <div>
+        <label>Email Address</label>
+        <input asp-for="Email_Address" type="email" />
+    </div>
+    <div>
+        <label>Mobile No</label>
+        <input asp-for="Mobile_No" />
+    </div>
+    <div>
+        <label>Comment</label>
+        <textarea asp-for="Comment"></textarea>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+        <p style="color:green;">@ViewBag.Message</p>
+}
