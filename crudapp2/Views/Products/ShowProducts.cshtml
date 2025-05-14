@@ -1,0 +1,27 @@
+﻿@model List<CrudApp1.Models.Product>
+
+@{
+    ViewData["Title"] = "All Products from Database";
+}
+
+<h2>All Products</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
