@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Todo SPA";
+}
+
+<h2>Simple SPA - Todo List</h2>
+
+<div>
+    <input type="text" id="taskInput" placeholder="Enter a task..." />
+    <button onclick="addTask()">Add</button>
+</div>
+
+<ul id="todoList"></ul>
+
+@section Scripts {
+    <script>
+        function loadTasks() {
+            fetch('/Todo/GetAll')
+                .then(res => res.json())
+                .then(data => {
+                    const list = document.getElementById("todoList");
+                    list.innerHTML = '';
+                    data.forEach(task => {
+                        const li = document.createElement("li");
+                        li.textContent = task.text;
+                        list.appendChild(li);
+                    });
+                });
+        }
+
+        function addTask() {
+            const input = document.getElementById("taskInput");
+            const value = input.value.trim();
+            if (!value) return;
+
+            fetch('/Todo/Add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: value })
+            })
+            .then(res => res.json())
+            .then(data => {
+                input.value = '';
+                loadTasks();
+            });
+        }
+
+        loadTasks();
+    </script>
+}
+
