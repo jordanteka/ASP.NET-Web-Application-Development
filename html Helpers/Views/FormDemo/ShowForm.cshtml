@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model htmlhelpers.Models.FormDemo
+@{
+    ViewData["Title"] = "HTML Helpers Demo";
+}
+
+<h2>HTML Helpers Form</h2>
+
+
+
+<form asp-action="ShowForm" method="post">
+
+    <div>
+        <label asp-for="Name"></label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.HiddenInfo, new { @Value = "HiddenData" })
+
+    <div>
+        <label>
+            @Html.CheckBoxFor(m => m.AgreeToTerms)
+            Agree to Terms
+        </label>
+    </div>
+
+    <div>
+        <label>Gender:</label><br />
+        @Html.RadioButtonFor(m => m.Gender, "Male") Male
+        @Html.RadioButtonFor(m => m.Gender, "Female") Female
+    </div>
+
+    <div>
+        <label asp-for="SelectedCountry"></label>
+        @Html.DropDownListFor(m => m.SelectedCountry, new SelectList(ViewBag.CountryList), "-- Select Country --", new { @class = "form-control" })
+    </div>
+
+    <div>
+        <label>Languages:</label><br />
+        @Html.ListBoxFor(m => m.SelectedLanguages, new MultiSelectList(ViewBag.Languages), new { @class = "form-control" })
+    </div>
+
+    <div>
+        <label asp-for="Comments"></label><br />
+        @Html.TextAreaFor(m => m.Comments, new { @class = "form-control", rows = 4 })
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        @Html.EditorFor(m => m.Email)
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
