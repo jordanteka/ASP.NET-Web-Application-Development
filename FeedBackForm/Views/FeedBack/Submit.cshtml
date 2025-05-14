@@ -1,0 +1,53 @@
+﻿@model FeedBackForm.Models.FeedBack
+
+@{
+    ViewData["Title"] = "Submit Feedback";
+}
+
+<h2>Feedback Form</h2>
+
+<form asp-action="Submit" method="post">
+    <div>
+        <label>Customer ID</label>
+        <input asp-for="Customer_ID" class="form-control" />
+        <span asp-validation-for="Customer_ID" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Customer Name</label>
+        <input asp-for="Customer_Name" class="form-control" />
+        <span asp-validation-for="Customer_Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Email Address</label>
+        <input asp-for="Email_Address" class="form-control" />
+        <span asp-validation-for="Email_Address" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Mobile No</label>
+        <input asp-for="Mobile_No" class="form-control" />
+        <span asp-validation-for="Mobile_No" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Comment</label>
+        <textarea asp-for="Comment" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
